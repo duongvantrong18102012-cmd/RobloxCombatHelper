@@ -1,8 +1,8 @@
 -- ===== LOADER.LUA =====
-local CombatHelper = {}
+local CombatHub = {}
 
 local function LoadModule(path)
-    local url = "https://raw.githubusercontent.com/duongvantrong18102012-cmd/RobloxCombatHelper/main/" .. path
+    local url = "https://raw.githubusercontent.com/duongvantrong18102012-cmd/RobloxCombatHub/main/" .. path
     local success, result = pcall(function()
         return loadstring(game:HttpGet(url))()
     end)
@@ -13,18 +13,39 @@ local function LoadModule(path)
     return result
 end
 
-print("🔄 Đang tải Combat Helper...")
+print("🔄 Đang tải Combat Hub Pro...")
 
-CombatHelper.Config = LoadModule("Config.lua")
-CombatHelper.Helpers = LoadModule("Utils/Helpers.lua")
-CombatHelper.ESP = LoadModule("Modules/ESP.lua")
-CombatHelper.Aimbot = LoadModule("Modules/Aimbot.lua")
-CombatHelper.Hitbox = LoadModule("Modules/Hitbox.lua")
-CombatHelper.Combat = LoadModule("Modules/CombatHelper.lua")
-CombatHelper.GUI = LoadModule("GUI/MainGUI.lua")
+-- Core
+CombatHub.Config = LoadModule("Config.lua")
+CombatHub.Utils = LoadModule("Core/Utils.lua")
+CombatHub.Events = LoadModule("Core/Events.lua")
 
-print("✅ Đã tải xong. Khởi tạo GUI...")
-CombatHelper.GUI:Create(CombatHelper)
+-- Modules (giữ nguyên)
+CombatHub.ESP_Base = LoadModule("Modules/ESP/Base.lua")
+CombatHub.ESP_Advanced = LoadModule("Modules/ESP/Advanced.lua")
+CombatHub.Aimbot_Base = LoadModule("Modules/Aimbot/Base.lua")
+CombatHub.Aimbot_Silent = LoadModule("Modules/Aimbot/Silent.lua")
+CombatHub.Aimbot_Triggerbot = LoadModule("Modules/Aimbot/Triggerbot.lua")
+CombatHub.Hitbox_Base = LoadModule("Modules/Hitbox/Base.lua")
+CombatHub.AutoShoot = LoadModule("Modules/Combat/AutoShoot.lua")
+CombatHub.AntiFlash = LoadModule("Modules/Combat/AntiFlash.lua")
 
-print("🚀 Combat Helper sẵn sàng!")
-return CombatHelper
+-- GUI mới
+CombatHub.Theme = LoadModule("GUI/Theme.lua")
+CombatHub.Animations = LoadModule("GUI/Animations.lua")
+CombatHub.Components = LoadModule("GUI/Components.lua")
+CombatHub.MainGUI = LoadModule("GUI/MainGUI.lua")
+CombatHub.ESPTab = LoadModule("GUI/ESPTab.lua")
+CombatHub.AimbotTab = LoadModule("GUI/AimbotTab.lua")
+CombatHub.HitboxTab = LoadModule("GUI/HitboxTab.lua")
+CombatHub.SettingsTab = LoadModule("GUI/SettingsTab.lua")
+
+-- Data
+CombatHub.Colors = LoadModule("Data/Colors.lua")
+CombatHub.Keybinds = LoadModule("Data/Keybinds.lua")
+
+print("✅ Tất cả module đã tải. Khởi tạo GUI...")
+CombatHub.MainGUI:Create(CombatHub)
+
+print("🚀 Combat Hub Pro sẵn sàng!")
+return CombatHub
